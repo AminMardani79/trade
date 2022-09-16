@@ -1,26 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
+import React, { useCallback, useState } from "react";
+// components
+import { AppBarComponent } from "./components";
+// mui
+import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
+const App: React.FC = (): JSX.Element => {
+  const [themeMode, setThemeMode] = useState<"light" | "dark">("light");
+  const theme = createTheme({
+    palette: {
+      mode: themeMode,
+    },
+    typography: {
+      fontSize: 14,
+    },
+  });
+  const handelDrawerToggle = useCallback(() => {}, []);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <AppBarComponent handelDrawerToggle={handelDrawerToggle} />
+    </ThemeProvider>
   );
-}
-
+};
 export default App;
